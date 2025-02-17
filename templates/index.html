@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doubt Solver</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ask Your Doubt</h1>
+        <form method="post">
+            <textarea name="question" placeholder="Enter your question" required></textarea>
+            <br>
+            <button type="submit">Ask</button>
+        </form>
+        {% if answer %}
+            <div class="answer">
+                <h2>Answer:</h2>
+                <p>{{ answer }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
