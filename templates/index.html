@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doubt Solver</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
+
     <div class="container">
-        <h1>Ask Your Doubt</h1>
-        <form method="post">
-            <textarea name="question" placeholder="Enter your question" required></textarea>
+        <h1>Doubt Solver</h1>
+
+        <!-- Chat History Box -->
+        <div class="chat-box">
+            {% if history %}
+                {% for message in history %}
+                    {% if message.role == 'user' %}
+                        <p class="user"><b>You:</b> {{ message.content | safe }}</p>
+                    {% else %}
+                        <p class="ai"><b>AI:</b> {{ message.content | safe }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No doubts yet! Ask something.</p>
+            {% endif %}
+        </div>
+
+        <!-- Input Form -->
+        <form method="POST">
+            <textarea name="question" placeholder="Enter your doubt..." required></textarea>
             <br>
-            <button type="submit">Ask</button>
+            <button type="submit">Ask Doubt</button>
         </form>
-        {% if answer %}
-            <div class="answer">
-                <h2>Answer:</h2>
-                <p>{{ answer }}</p>
-            </div>
-        {% endif %}
+
+        <!-- Clear Chat Button -->
+        <form action="/clear" method="GET">
+            <button type="submit" class="clear-btn">Clear Chat</button>
+        </form>
+
     </div>
+
 </body>
 </html>
