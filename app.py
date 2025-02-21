@@ -19,7 +19,7 @@ def format_answer(answer):
 # Function to get AI response while keeping history
 def get_ai_response(history):
     headers = {"Authorization": f"Bearer {TOGETHER_API_KEY}", "Content-Type": "application/json"}
-    payload = {"model": "mistralai/Mistral-7B-Instruct-v0.1", "messages": history}
+    payload = {"model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K", "messages": history}
     
     response = requests.post(TOGETHER_API_URL, json=payload, headers=headers)
     return response.json().get("choices", [{}])[0].get("message", {}).get("content", "No response")
